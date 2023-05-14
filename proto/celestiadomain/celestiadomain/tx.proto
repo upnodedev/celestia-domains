@@ -1,0 +1,7 @@
+syntax = "proto3";
+package celestiadomain.celestiadomain;
+
+option go_package = "celestia-domain/x/celestiadomain/types";
+
+// Msg defines the Msg service.
+service Msg {}
