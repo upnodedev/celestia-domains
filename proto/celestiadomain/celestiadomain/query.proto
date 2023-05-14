@@ -6,6 +6,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "celestiadomain/celestiadomain/params.proto";
+import "celestiadomain/celestiadomain/domain.proto";
 
 option go_package = "celestia-domain/x/celestiadomain/types";
 
@@ -18,9 +19,15 @@ service Query {
   
   }
   
-  // Queries a list of Domain items.
+  // Query a domain name.
   rpc Domain (QueryDomainRequest) returns (QueryDomainResponse) {
     option (google.api.http).get = "/celestia-domain/celestiadomain/domain";
+  
+  }
+  
+  // Queries a list of Domains items.
+  rpc Domains (QueryDomainsRequest) returns (QueryDomainsResponse) {
+    option (google.api.http).get = "/celestia-domain/celestiadomain/domains";
   
   }
 }
@@ -34,10 +41,28 @@ message QueryParamsResponse {
   Params params = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryDomainRequest {}
+message QueryDomainRequest {
+  string domain = 1;
+}
 
 message QueryDomainResponse {
-  string domain     = 1;
-  uint64 expiration = 2;
+  string owner    = 1;
+  string domain     = 2;
+  uint64 expiration = 3;
+}
+
+message QueryDomainsRequest {
+  string owner = 1;
+
+  // Adding pagination to request
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryDomainsResponse {
+  // Returning a list of recipes
+  repeated Domain domain = 1;
+
+  // Adding pagination to response
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
