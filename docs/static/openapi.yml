@@ -4,6 +4,40 @@ info:
   name: ''
   description: ''
 paths:
+  /celestia-domain/celestiadomain/domain:
+    get:
+      summary: Queries a list of Domain items.
+      operationId: CelestiadomainCelestiadomainDomain
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              domain:
+                type: string
+              expiration:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /celestia-domain/celestiadomain/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -43903,9 +43937,22 @@ paths:
 definitions:
   celestiadomain.celestiadomain.MsgRegisterDomainResponse:
     type: object
+    properties:
+      domain:
+        type: string
+      expiration:
+        type: string
+        format: uint64
   celestiadomain.celestiadomain.Params:
     type: object
     description: Params defines the parameters for the module.
+  celestiadomain.celestiadomain.QueryDomainResponse:
+    type: object
+    properties:
+      domain:
+        type: string
+      expiration:
+        type: string
   celestiadomain.celestiadomain.QueryParamsResponse:
     type: object
     properties:
