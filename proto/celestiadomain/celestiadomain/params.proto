@@ -1,0 +1,12 @@
+syntax = "proto3";
+package celestiadomain.celestiadomain;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "celestia-domain/x/celestiadomain/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}

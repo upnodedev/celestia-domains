@@ -1,0 +1,12 @@
+syntax = "proto3";
+package celestiadomain.celestiadomain;
+
+import "gogoproto/gogo.proto";
+import "celestiadomain/celestiadomain/params.proto";
+
+option go_package = "celestia-domain/x/celestiadomain/types";
+
+// GenesisState defines the celestiadomain module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
