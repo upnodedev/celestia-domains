@@ -43901,6 +43901,8 @@ paths:
       tags:
         - Query
 definitions:
+  celestiadomain.celestiadomain.MsgRegisterDomainResponse:
+    type: object
   celestiadomain.celestiadomain.Params:
     type: object
     description: Params defines the parameters for the module.

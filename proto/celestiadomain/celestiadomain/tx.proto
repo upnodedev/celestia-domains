@@ -1,7 +1,20 @@
 syntax = "proto3";
+
 package celestiadomain.celestiadomain;
 
 option go_package = "celestia-domain/x/celestiadomain/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc RegisterDomain (MsgRegisterDomain) returns (MsgRegisterDomainResponse);
+}
+message MsgRegisterDomain {
+  string creator = 1;
+  string domain  = 2;
+}
+
+message MsgRegisterDomainResponse {
+  string domain = 1;
+  uint64 expiration = 2;
+}
+
