@@ -18,6 +18,39 @@ paths:
                 type: string
               expiration:
                 type: string
+                format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /celestia-domain/celestiadomain/domains:
+    get:
+      summary: Queries a list of Domains items.
+      operationId: CelestiadomainCelestiadomainDomains
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              domain:
+                type: string
         default:
           description: An unexpected error response.
           schema:
@@ -43952,6 +43985,12 @@ definitions:
       domain:
         type: string
       expiration:
+        type: string
+        format: uint64
+  celestiadomain.celestiadomain.QueryDomainsResponse:
+    type: object
+    properties:
+      domain:
         type: string
   celestiadomain.celestiadomain.QueryParamsResponse:
     type: object

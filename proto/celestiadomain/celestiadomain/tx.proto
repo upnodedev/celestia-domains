@@ -14,7 +14,8 @@ message MsgRegisterDomain {
 }
 
 message MsgRegisterDomainResponse {
-  string domain = 1;
-  uint64 expiration = 2;
+  string owner = 1;
+  string domain = 2;
+  uint64 expiration = 3;
 }
 

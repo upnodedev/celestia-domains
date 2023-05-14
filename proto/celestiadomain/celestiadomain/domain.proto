@@ -5,13 +5,13 @@ package celestiadomain.celestiadomain;
 option go_package = "celestia-domain/x/celestiadomain/types";
 
 message Domain {
-  string creator = 1;
+  string owner = 1;
   string domain = 3; 
   string parent = 4;
   uint64 expiration = 5; 
 }
 
 message PrimaryDomain {
-  string creator = 1;
+  string owner = 1;
   string domain = 2;
 }
