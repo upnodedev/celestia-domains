@@ -67,7 +67,7 @@ message QueryDomainsRequest {
 message QueryDomainsResponse {
   
   // Returning a list of recipes
-  repeated Domain domain = 1;
+  repeated Domain domains = 1;
   
   // Adding pagination to response
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
