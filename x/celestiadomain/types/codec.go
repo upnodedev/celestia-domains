@@ -9,12 +9,16 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgRegisterDomain{}, "celestiadomain/RegisterDomain", nil)
+	cdc.RegisterConcrete(&MsgSetPrimaryDomain{}, "celestiadomain/SetPrimaryDomain", nil)
 	// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgRegisterDomain{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgSetPrimaryDomain{},
 	)
 	// this line is used by starport scaffolding # 3
 

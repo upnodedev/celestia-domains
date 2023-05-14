@@ -44132,6 +44132,8 @@ definitions:
       expiration:
         type: string
         format: uint64
+  celestiadomain.celestiadomain.MsgSetPrimaryDomainResponse:
+    type: object
   celestiadomain.celestiadomain.Params:
     type: object
     description: Params defines the parameters for the module.
