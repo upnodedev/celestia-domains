@@ -97,6 +97,10 @@ func (k msgServer) RegisterDomain(goCtx context.Context, msg *types.MsgRegisterD
 		if parentDomain.Owner != msg.Creator {
 			return nil, status.Error(codes.PermissionDenied, "parent domain doesn't owned by you")
 		}
+
+		if parentDomain.Expiration < uint64(ctx.BlockTime().Unix()) {
+			return nil, status.Error(codes.PermissionDenied, "parent domain is expired")
+		}
 	}
 
 	// Define domain object
