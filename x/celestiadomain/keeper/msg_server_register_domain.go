@@ -85,6 +85,20 @@ func (k msgServer) RegisterDomain(goCtx context.Context, msg *types.MsgRegisterD
 	}
 	parent := strings.Join(parts[1:], ".")
 
+	// Check parent ownership if registering a new subdomain
+	if len(parts) > 2 {
+		parentDomain, err := k.Domain(goCtx, &types.QueryDomainRequest{
+			Domain: parent,
+		})
+		if err != nil {
+			return nil, status.Error(codes.FailedPrecondition, "parent domain doesn't exists or has some error")
+		}
+
+		if parentDomain.Owner != msg.Creator {
+			return nil, status.Error(codes.PermissionDenied, "parent domain doesn't owned by you")
+		}
+	}
+
 	// Define domain object
 	expiration := ctx.BlockTime().AddDate(1, 0, 0)
 	domain := DomainType{

@@ -73,9 +73,11 @@ message QueryDomainsResponse {
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
-message QueryPrimaryDomainRequest {}
+message QueryPrimaryDomainRequest {
+  string owner = 1;
+}
 
 message QueryPrimaryDomainResponse {
-  string domain = 1;
+  Domain domain = 1;
 }
 

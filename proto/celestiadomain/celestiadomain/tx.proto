@@ -6,7 +6,8 @@ option go_package = "celestia-domain/x/celestiadomain/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc RegisterDomain (MsgRegisterDomain) returns (MsgRegisterDomainResponse);
+  rpc RegisterDomain   (MsgRegisterDomain  ) returns (MsgRegisterDomainResponse  );
+  rpc SetPrimaryDomain (MsgSetPrimaryDomain) returns (MsgSetPrimaryDomainResponse);
 }
 message MsgRegisterDomain {
   string creator = 1;
@@ -14,8 +15,15 @@ message MsgRegisterDomain {
 }
 
 message MsgRegisterDomainResponse {
-  string owner = 1;
-  string domain = 2;
+  string owner      = 1;
+  string domain     = 2;
   uint64 expiration = 3;
 }
+
+message MsgSetPrimaryDomain {
+  string creator = 1;
+  string domain  = 2;
+}
+
+message MsgSetPrimaryDomainResponse {}
 
