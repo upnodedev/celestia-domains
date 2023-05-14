@@ -30,6 +30,12 @@ service Query {
     option (google.api.http).get = "/celestia-domain/celestiadomain/domains";
   
   }
+  
+  // Queries a list of PrimaryDomain items.
+  rpc PrimaryDomain (QueryPrimaryDomainRequest) returns (QueryPrimaryDomainResponse) {
+    option (google.api.http).get = "/celestia-domain/celestiadomain/primary_domain";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -46,23 +52,30 @@ message QueryDomainRequest {
 }
 
 message QueryDomainResponse {
-  string owner    = 1;
+  string owner      = 1;
   string domain     = 2;
   uint64 expiration = 3;
 }
 
 message QueryDomainsRequest {
   string owner = 1;
-
+  
   // Adding pagination to request
   cosmos.base.query.v1beta1.PageRequest pagination = 2;
 }
 
 message QueryDomainsResponse {
+  
   // Returning a list of recipes
   repeated Domain domain = 1;
-
+  
   // Adding pagination to response
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryPrimaryDomainRequest {}
+
+message QueryPrimaryDomainResponse {
+  string domain = 1;
 }
 
