@@ -22,14 +22,18 @@ func (k Keeper) Domains(goCtx context.Context, req *types.QueryDomainsRequest) (
 
 	// Get store
 	store := ctx.KVStore(k.storeKey)
-	domainStore := prefix.NewStore(store, []byte("owned-domains-"+req.Owner))
+	domainStore := prefix.NewStore(store, []byte("domain"))
+	ownedDomainStore := prefix.NewStore(store, []byte("owned-domains-"+req.Owner))
 
 	// Paginate the recipes store based on PageRequest
 	var domains []*types.Domain
 
-	pageRes, err := query.Paginate(domainStore, req.Pagination, func(key []byte, value []byte) error {
+	pageRes, err := query.Paginate(ownedDomainStore, req.Pagination, func(key []byte, value []byte) error {
 		var domain DomainType
-		if err := json.Unmarshal(value, &domain); err != nil {
+
+		domainJson := domainStore.Get(value)
+
+		if err := json.Unmarshal(domainJson, &domain); err != nil {
 			return err
 		}
 

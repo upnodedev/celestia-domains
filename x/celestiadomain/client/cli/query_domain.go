@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"celestia-domain/x/celestiadomain/types"
+
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
@@ -13,10 +14,11 @@ var _ = strconv.Itoa(0)
 
 func CmdDomain() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "domain",
+		Use:   "domain [domain]",
 		Short: "Query domain",
-		Args:  cobra.ExactArgs(0),
+		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
+			argDomain := args[0]
 
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
@@ -25,7 +27,9 @@ func CmdDomain() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryDomainRequest{}
+			params := &types.QueryDomainRequest{
+				Domain: argDomain,
+			}
 
 			res, err := queryClient.Domain(cmd.Context(), params)
 			if err != nil {

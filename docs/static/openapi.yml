@@ -56,7 +56,7 @@ paths:
           schema:
             type: object
             properties:
-              domain:
+              domains:
                 type: array
                 items:
                   type: object
@@ -228,7 +228,17 @@ paths:
             type: object
             properties:
               domain:
-                type: string
+                type: object
+                properties:
+                  owner:
+                    type: string
+                  domain:
+                    type: string
+                  parent:
+                    type: string
+                  expiration:
+                    type: string
+                    format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -247,6 +257,11 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      parameters:
+        - name: owner
+          in: query
+          required: false
+          type: string
       tags:
         - Query
   /cosmos/auth/v1beta1/accounts:
@@ -44150,7 +44165,7 @@ definitions:
   celestiadomain.celestiadomain.QueryDomainsResponse:
     type: object
     properties:
-      domain:
+      domains:
         type: array
         items:
           type: object
@@ -44203,7 +44218,17 @@ definitions:
     type: object
     properties:
       domain:
-        type: string
+        type: object
+        properties:
+          owner:
+            type: string
+          domain:
+            type: string
+          parent:
+            type: string
+          expiration:
+            type: string
+            format: uint64
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
